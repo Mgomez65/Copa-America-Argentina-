@@ -21,6 +21,7 @@ const Actualizar = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: 'include',
                 body: JSON.stringify(data),
             });
         {console.log(userId)}
@@ -43,11 +44,11 @@ const Actualizar = () => {
                     className="actualizarInput"
                     placeholder="Email"
                     {...register("gmail", {
-                        required: true,
+                        
                         pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
                 />
-                {errors.gmail?.type === "required" && <p>El campo es requerido</p>}
+                
                 {errors.gmail?.type === "pattern" && (
                     <p>El formato de email no es correcto</p>
                 )}</div>
@@ -60,12 +61,10 @@ const Actualizar = () => {
                     type="text"
                     placeholder="Nombre De usuario"
                     {...register("nombreUsuario", {
-                        required: true,
+                        
                     })}
                 />
-                {errors.nombreUsuario?.type === "required" && (
-                    <p>El campo es requerido</p>
-                )}</div>
+              </div>
 
 
 
@@ -76,14 +75,13 @@ const Actualizar = () => {
                     type="password"
                     placeholder="Contraseña"
                     {...register("password", {
-                        required: true,
                         pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
                     })}
                 />
                 {errors.password?.type === "pattern" && (
                     <p>La Contrasña debe tener 1 Mayusculo, 1 minusdcula y mas de 8 caracteres</p>
                 )}
-                {errors.password?.type === "required" && <p>El campo es requerido</p>}
+                
             </div>
 
 

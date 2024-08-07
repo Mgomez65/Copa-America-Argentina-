@@ -2,21 +2,21 @@ const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 
-exports.register = async (req, res)=>{    
+exports.register = async (req, res) => {
     try {
         const data = req.body
-        conexion.query('SELECT * FROM USUARIOS WHERE gmail = ?',[data.gmail], async (err, results) => {
-            if (err) throw err;       
+        conexion.query('SELECT * FROM USUARIOS WHERE gmail = ?', [data.gmail], async (err, results) => {
+            if (err) throw err;
             if (results.length > 0) {
                 return res.status(400).json({ message: 'El correo ya está registrado' });
             }
-            conexion.query('SELECT * FROM USUARIOS WHERE nombreUsuario = ?'[data.nombreUsuario],async(err,results)=>{
-                if (err) throw err;       
+            conexion.query('SELECT * FROM USUARIOS WHERE nombreUsuario = ?'[data.nombreUsuario], async (err, results) => {
+                if (err) throw err;
                 if (results.length > 0) {
                     return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
                 }
-                let passHash = await bcryptjs.hash(data.password, 8);    
-                conexion.query('INSERT INTO usuarios SET ?', {gmail:data.gmail, nombreUsuario:data.nombreUsuario, password:passHash}, (error, results)=>{
+                let passHash = await bcryptjs.hash(data.password, 8);
+                conexion.query('INSERT INTO usuarios SET ?', { gmail: data.gmail, nombreUsuario: data.nombreUsuario, password: passHash }, (error, results) => {
                     if (error) {
                         console.log(error);
                         res.status(400).json({ message: 'Error al registrar usuario' });
@@ -24,13 +24,14 @@ exports.register = async (req, res)=>{
                         res.status(200).json({ message: 'Usuario registrado exitosamente', });
                     }
                 })
-            })})
+            })
+        })
     } catch (error) {
         console.log(error)
-    }       
+    }
 }
 
-exports.login = async (req,res) => {
+exports.login = async (req, res) => {
     try {
         const data = req.body;
         conexion.query('SELECT * FROM usuarios WHERE gmail = ?', [data.gmail], async (error, resultado) => {
@@ -96,22 +97,41 @@ exports.deleteUser = (req, res) => {
     });
 };
 
-exports.updateUser =  async(req, res) => {
+exports.updateUser = async (req, res) => {
     const userId = req.params.id;
-    const data = req.body;
-    const newPassword = await bcryptjs.hash(req.body.password, 8);;
-    const nuevo = {
-        gmail: data.gmail,
-        nombreUsuario: data.nombreUsuario,
-        password: newPassword
+    const { gmail, nombreUsuario, password } = req.body;
+    try {
+        conexion.query('SELECT * FROM usuarios WHERE gmail = ?', [gmail, userId], (error, resultado) => {
+            if (error) throw error;
+            if (resultado.length > 0) {
+                return res.status(400).json({ message: 'El corro ya esta en uso' });
+            }
+            conexion.query('SELECT * FROM usuarios WHERE nombreUsuario = ? ', [nombreUsuario, userId], async (error, resultado) => {
+                if (error) throw error;
+                if (resultado.length > 0) {
+                    return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
+                }
+
+                const passHash = await bcryptjs.hash(password, 8);
+                const nuevo = {
+                    gmail: gmail,
+                    nombreUsuario: nombreUsuario,
+                    password: passHash
+                };
+
+                conexion.query('UPDATE usuarios SET ? WHERE id = ?', [nuevo, userId], (error, results) => {
+                    if (error) {
+                        console.error('Error al actualizar el usuario:', error);
+                        return res.status(500).send('Error interno del servidor');
+                    }
+                    res.status(200).json({ message: 'Usuario actualizado exitosamente' });
+                });
+            });
+        });
+    } catch (err) {
+        console.error('Error en el proceso de actualización del usuario:', err);
+        res.status(500).send('Error interno del servidor');
     }
-    conexion.query('UPDATE usuarios SET ? WHERE id = ?', [nuevo,userId], (error, results) => {
-        if (error) {
-            console.error('Error en la actualización de la base de datos:', error);
-            return res.status(500).send('Error interno del servidor');
-        }
-        res.status(200).json({ message: 'Usuario actualizado exitosamente' });
-    });
 };
 
 

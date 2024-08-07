@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const authenticateToken = (req, res, next) => {
   
   const token = req.cookies.jwt;
-  //nos fijamos si el teken existe 
   if (!token) return res.sendStatus(401); 
   
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
