@@ -1,0 +1,149 @@
+/* estilos/pruebo.css */
+
+.column_gallery {
+  display: grid; 
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; 
+  margin: 20px; 
+  
+}
+
+.HeaderIzquierdo{
+  display: flex;
+  align-items: center;
+}
+.HeaderDerecho{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.HeaderIzquierdo h2{
+  margin-right: 15px;
+}
+.IconosAfa{
+  width: 40px;
+  height: 40px;
+}
+
+.jugador-logo {
+  padding: 10px;
+  border-radius: 10%;
+  width: 250px;
+  height: 180px;
+}
+.botonIcono {
+  display: flex;
+  align-items: center;
+}
+.botonIcono img {
+  margin-right: 10px; 
+}
+.Iconos{
+  width: 20px;
+  height: 20px;
+}
+.ContenedorJugadores{
+  background-color:#ffffff; 
+  border: 1px solid #00000036;
+}
+.DetallesJugadores {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 10px;
+}
+.jugador-info{
+  border-radius: 5px;
+  background-color:#ffffff; 
+  border: 1px solid #00000036;
+  margin-top: 10px;
+}
+.BotonJugadores{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 25px ;
+  
+  gap: 16px;
+  width: 90%;
+  background-color:#f4f4f4; 
+  border: 1px solid #00000036;
+  padding: 10px;
+}
+
+.graficoPartido {
+  border: 1px solid #00000036;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.column_Jugador{
+display: grid; 
+grid-template-columns: 50% 65%;
+padding: 20px;
+gap: 20px; 
+margin: 0 20px; 
+align-items: flex-start;
+}
+.recharts-wrapper{
+  margin: 15px;
+}
+.ContedorPartidos{
+  border: 1px solid #00000036;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  width: 550px;
+}
+.botonPartido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  gap: 16px;
+  width: 100%;
+}
+
+
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+  flex: 1
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+
+}
+
+.vs {
+  font-size: 18px;
+  width: 60px; 
+  flex-shrink: 0;
+  padding: 5px;
+}
+
+.tituloPartidos{
+  font-size: 25px;
+  font-weight: bold;
+  font-weight: bold;
+  text-align: center;
+}
+.proximoPartidos{
+  background-color: #ffffff;
+  border: 1px solid #00000036;
+  border-radius: 0.5rem;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+}
