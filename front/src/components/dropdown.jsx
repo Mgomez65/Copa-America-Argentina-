@@ -14,7 +14,7 @@ const MenuAjuestes = () => {
     const navigate = useNavigate()
 
     const cerraSecion = async () => {
-        const response = await fetch('http://localhost:8000/logout', {
+        const response = await fetch('http://localhost:3000/users/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

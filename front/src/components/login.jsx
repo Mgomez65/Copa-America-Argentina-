@@ -19,7 +19,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch("http://localhost:3000/users/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -27,13 +27,13 @@ const Login = () => {
         body: JSON.stringify(data),
         credentials: 'include'
       });
-        const respuesta = await response.json();     
-    if (response.ok) {
-
-      navigate('/gallery');
-    }else{
-      alert(respuesta.message);
-    }
+        const respuesta = await response.json(); 
+        console.log(response)    
+        if (response.ok) {
+          navigate('/gallery');
+      } else {
+          alert(respuesta.message);
+      }
     } catch (error) {
       alert("Error registrando usuario: " + error.message);
     }
