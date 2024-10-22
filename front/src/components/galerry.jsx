@@ -20,7 +20,7 @@ const Pruebo = () => {
                 const response = await fetch(url, {
                     method: 'GET',
                     headers: {
-                        'x-apisports-key': "c7c23ac2199a5e7df2282b84da987986",
+                        'x-apisports-key': "cb8078c4275aa2c8d8fb7de41555967c",
                         'x-rapidapi-host': "v3.football.api-sports.io"
                     }
                 });
@@ -41,7 +41,10 @@ const Pruebo = () => {
                 const response = await fetch(url, {
                     method: 'GET',
                     headers: {
-                        'x-apisports-key': "c7c23ac2199a5e7df2282b84da987986",
+                        /* key Walter: c7c23ac2199a5e7df2282b84da987986 */
+                        /* key Abril: cb8078c4275aa2c8d8fb7de41555967c */
+                        /* Key Walter2: 1842e3ae46531ef391fca43cdef973b3 */
+                        'x-apisports-key': "cb8078c4275aa2c8d8fb7de41555967c",
                         'x-rapidapi-host': "v3.football.api-sports.io"
                     }
                 });
@@ -93,7 +96,6 @@ const Pruebo = () => {
         <div className="flex flex-col min-h-[100dvh]">
             <header className="header">
                 <div className="HeaderIzquierdo"> <img src="../../public/ESCUDO.png" alt=" escudo Afa" className="IconosAfa" /><h2>Copa America 2024 Selecion Argentina </h2>
-                    <MenuAjuestes />
                 </div>
                 <div className="HeaderDerecho">
                     <button className=" botonIcono" onClick={toggleMostrarPartidos}>
@@ -104,6 +106,8 @@ const Pruebo = () => {
                         <img src="../../public/persona.png" alt=" Iconos jugadores" className="Iconos" />
                         {mostrarJugadores ? "Ocultar " : "Mostrar "} Jugadores
                     </button>
+                    <MenuAjuestes />
+
                 </div>
 
             </header>
@@ -121,13 +125,14 @@ const Pruebo = () => {
                                         <div className="botonPartido">
                                             <div className="team">
                                                 <img src={partido.teams.home.logo} alt={`${partido.teams.home.name} logo`} className="team-logo" />
-                                                <span className="team name">{partido.teams.home.name}</span>
+                                                <span className="team-name">{partido.teams.home.name}</span>
                                             </div>
                                             <span className="vs"><strong>{partido.goals.home} vs {partido.goals.away}</strong></span>
                                             <div className="team">
                                                 <img src={partido.teams.away.logo} alt={`${partido.teams.away.name} logo`} className="team-logo" />
-                                                <span className="team name">{partido.teams.away.name}</span>
-                                            </div></div>
+                                                <span className="team-name">{partido.teams.away.name}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -207,18 +212,17 @@ const Pruebo = () => {
                             </div>
                         </div>
                     )}
-
-                    {partidoSeleccionado && (
-                        <div className="graficoPartido">
-                            <h2 className="tituloPartidos "> Estadistica Argentina Campeona Copa America 2024 </h2>
-                            <ArgentinaInfoWithRadar />
-                        </div>
-                    )}
+                    <div className="graficoPartido">
+                        {partidoSeleccionado && (
+                            <div>
+                                <h2 className="tituloPartidos "> Estadistica Argentina Campeona Copa America 2024 </h2>
+                                <ArgentinaInfoWithRadar />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             {partidoSeleccionado && (<Proximo />)}
-            
-            
         </div>
     );
 };

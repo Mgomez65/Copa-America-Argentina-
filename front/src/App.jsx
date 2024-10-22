@@ -18,7 +18,6 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/detalles" element={<Detalles />} />
         </Route>
-        
       </Routes>
     </Router>
   );
