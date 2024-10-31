@@ -37,7 +37,8 @@ const MenuAjuestes = () => {
     return (
         <div>
             <Dropdown isOpen={estado} toggle={abrir}>
-                <Button className="botonAjustes"><img src="../../public/icons-ajustes.png" alt=" escudo Afa" className="IconosAjuste" /></Button>
+            <DropdownToggle   className="botonAjustes" caret> <img src="../../public/icons-ajustes.png" alt=" escudo Afa" className="IconosAjuste" /></DropdownToggle>
+                
                 <DropdownMenu>
                     <DropdownItem onClick={()=> detallesCuentas()}> Ver detalles de cuentas </DropdownItem>
                     <DropdownItem onClick={() =>cerraSecion()}>Cerrar Sesion </DropdownItem>

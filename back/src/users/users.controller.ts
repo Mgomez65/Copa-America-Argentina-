@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpException, HttpStatus,  } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -17,8 +17,7 @@ export class UsersController {
   @Post('login')
   async login( @Body() body: { email: string; password: string }, @Res() res: Response) {
     const { email, password } = body;
-    console.log(email,password)
-    
+  
 
     const { token } = await this.usersService.login(email, password);
     
@@ -30,8 +29,7 @@ export class UsersController {
     console.log("Las cookies son: " + JSON.stringify(cookieOptions));
 
     res.cookie('jwt', token, cookieOptions);
-    return res.status(200).json({ message: 'Inicio de sesión exitoso' }); // Devuelve el mensaje sin usar res.status
-  }
+    return new HttpException("Ususario registrado",HttpStatus.OK);   }
 
   @Get('Users')
   findAll() {
@@ -40,19 +38,27 @@ export class UsersController {
 
   @Get('user/:id')
   findOne(@Param('id') id: string) {
-    
-    return this.usersService.findOne(+id);
+
+    return this.usersService.findUser(+id);
   }
 
   @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+    console.log(updateUserDto)
+    const update = {
+      email: updateUserDto.email,
+      password: updateUserDto.password,
+      username: updateUserDto.username, 
+  };
+  
+    return this.usersService.update(+id, update);
   }
 
   @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   } 
+
    @Post('logout')
   logout(@Res() res: Response) {
     res.cookie('jwt', '', { maxAge: 1 });
