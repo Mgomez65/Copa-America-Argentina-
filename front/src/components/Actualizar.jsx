@@ -13,10 +13,11 @@ const Actualizar = () => {
 
     const onSubmit =   async (data) => {
         const userId = GetUserId();
+        console.log(userId);
     
         try {
-            const response = await fetch(`http://localhost:3000/users/update/${userId}`, {
-                method: "Patch",
+            const response = await fetch(`http://localhost:8000/users/${userId}`, {
+                method: "post",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -42,13 +43,13 @@ const Actualizar = () => {
                 <input
                     className="actualizarInput"
                     placeholder="Email"
-                    {...register("email", {
+                    {...register("gmail", {
                         
                         pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                     })}
                 />
                 
-                {errors.email?.type === "pattern" && (
+                {errors.gmail?.type === "pattern" && (
                     <p>El formato de email no es correcto</p>
                 )}</div>
 
@@ -59,7 +60,7 @@ const Actualizar = () => {
                     className="actualizarInput"
                     type="text"
                     placeholder="Nombre De usuario"
-                    {...register("username", {
+                    {...register("nombreUsuario", {
                         
                     })}
                 />
