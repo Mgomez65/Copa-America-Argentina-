@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpException, HttpStatus,  } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -28,7 +28,8 @@ export class UsersController {
   @ApiResponse({ status: 401, description: 'Credenciales incorrectas.' })
   async login(@Body() body: { email: string; password: string }, @Res() res: Response) {
     const { email, password } = body;
-    console.log(email, password);
+    console.log(email,password)
+    
 
     const { token } = await this.usersService.login(email, password);
 
@@ -39,7 +40,7 @@ export class UsersController {
     console.log("Las cookies son: " + JSON.stringify(cookieOptions));
 
     res.cookie('jwt', token, cookieOptions);
-    return res.status(200).json({ message: 'Inicio de sesión exitoso' });
+    return res.status(200).json({ message: 'Inicio de sesión exitoso' }); // Devuelve el mensaje sin usar res.status
   }
 
   @Get('Users')
@@ -55,6 +56,7 @@ export class UsersController {
   @ApiResponse({ status: 200, description: 'Usuario encontrado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   findOne(@Param('id') id: string) {
+    
     return this.usersService.findOne(+id);
   }
 
@@ -65,7 +67,14 @@ export class UsersController {
   @ApiResponse({ status: 200, description: 'Usuario actualizado exitosamente.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+    console.log(updateUserDto)
+    const update = {
+      email: updateUserDto.email,
+      password: updateUserDto.password,
+      username: updateUserDto.username, 
+  };
+  
+    return this.usersService.update(+id, update);
   }
 
   @Delete('delete/:id')
@@ -75,11 +84,8 @@ export class UsersController {
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
-  }
-
-  @Post('logout')
-  @ApiOperation({ summary: 'Cerrar sesión de usuario' })
-  @ApiResponse({ status: 200, description: 'Cierre de sesión exitoso.' })
+  } 
+   @Post('logout')
   logout(@Res() res: Response) {
     res.cookie('jwt', '', { maxAge: 1 });
     return res.status(200).json({ message: 'Cierre de sesión exitoso' });

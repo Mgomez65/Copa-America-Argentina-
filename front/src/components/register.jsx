@@ -15,7 +15,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const response = await fetch("http://localhost:3000/users/create", {
+      const response = await fetch("http://localhost:8000/register", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -39,12 +39,12 @@ const Register = () => {
           <input
             className="register-input"
             placeholder="Email"
-            {...register("email", {
+            {...register("gmail", {
               required: true,
               pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
             })}
           />
-          {errors.email?.type === "required" && <p>El campo es requerido</p>}
+          {errors.gmail?.type === "required" && <p>El campo es requerido</p>}
           {errors.gmaemailil?.type === "pattern" && (
             <p>El formato de email no es correcto</p>
           )}
@@ -54,11 +54,11 @@ const Register = () => {
             className="register-input"
             type="text"
             placeholder="Nombre De usuario"
-            {...register("username", {
+            {...register("nombreUsuario", {
               required: true,
             })}
           />
-          {errors.username?.type === "required" && (
+          {errors.nombreUsuario?.type === "required" && (
             <p>El campo es requerido</p>
           )}
         </div>
@@ -73,7 +73,7 @@ const Register = () => {
             })}
           />
           {errors.password?.type === "pattern" && (
-            <p>La Contrasña debe tener 1 Mayusculo, 1 minusdcula y mas de 8 caracteres</p>
+            <p>La Contraseña debe tener 1 Mayúscula, 1 minúscula y más de 8 caracteres</p>
           )}
           {errors.password?.type === "required" && <p>El campo es requerido</p>}
         </div>

@@ -48,9 +48,9 @@ const Home = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-10">
                         <div>
                             <img
-                                src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt04c00767f05f9b8c/615f5bdc07aaed59472ea335/4a923803766b0842cfd5c563bfa04d676679038b.jpg"
+                                src="./DiMariaCopa.jpg"
                                 alt="Argentina Campeona"
-                                className=""
+                                style={{'width': '600px'}}
                             />
                         </div>
 

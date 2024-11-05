@@ -19,7 +19,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const response = await fetch("http://localhost:3000/users/login", {
+      const response = await fetch("http://localhost:8000/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const Login = () => {
     <div className="flex flex-col min-h-[100dvh]">
       <header className="header">
       <div className="HeaderIzquierdo"> 
-        <img src="../../public/ESCUDO.png" alt=" escudo Afa" className="IconosAfa" /><h2>Copa America 2024 Selecion Argentina </h2>
+        <img src="../../public/ESCUDO.png" alt=" escudo Afa" className="IconosAfa" /><h2>Copa America 2024 Selección Argentina </h2>
 
         </div>
         <a className="flex items-center justify-center" href="#"></a>
@@ -86,7 +86,7 @@ const Login = () => {
                 })}
               />
               {errors.password?.type === "pattern" && (
-                <p>La Contrasña debe tener 1 Mayusculo, 1 minusdcula y  mas de 8 caracteres</p>
+                <p>La Contraseña debe tener 1 Mayúscula, 1 minúscula y más de 8 caracteres</p>
               )}
               {errors.password?.type === "required" && <p>El campo es requerido</p>}
             </div>

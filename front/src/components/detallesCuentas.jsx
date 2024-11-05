@@ -12,7 +12,7 @@ const Detalles = () => {
 
     const MostrarInfomacion = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/users/user/${userId}`, {
+            const response = await fetch(`http://localhost:8000/users/${userId}`, {
                 method: "GET",
                 credentials: 'include', 
                 headers: {
@@ -38,7 +38,7 @@ const Detalles = () => {
     };
     const eliminar = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/users/delete/${userId}`, {
+            const response = await fetch(`http://localhost:8000/delete/${userId}`, {
                 method: "DELETE",
                 credentials: 'include',
                 headers: {
@@ -94,8 +94,8 @@ const Detalles = () => {
                 </div>
                 <div className="Informacion">
                     <h2 className="tituloPartidos"><strong>Información de la Cuenta</strong></h2><br />
-                    <h4>Nombre de Usuario: <strong>{usuarios.username}</strong></h4>
-                    <h4>Email: <strong>{usuarios.email}</strong></h4><br />
+                    <h4>Nombre de Usuario: <strong>{usuarios.nombreUsuario}</strong></h4>
+                    <h4>Email: <strong>{usuarios.gmail}</strong></h4><br />
                     <button className="boton_eliminar" onClick={eliminar}>Eliminar</button>
                 </div>
             </div>

@@ -13,6 +13,7 @@ async function bootstrap() {
   app.enableCors({
     origin: 'http://localhost:5173', 
     credentials: true, 
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
   });
 
   // Configuración de Swagger
