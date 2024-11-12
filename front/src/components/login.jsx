@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Register from "./register"
 const Login = () => {
 
-  const [gmail, setGmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const {
@@ -19,7 +19,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch("http://localhost:3000/users/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -65,13 +65,13 @@ const Login = () => {
               <input
                 className="register-input"
                 placeholder="Email"
-                {...register("gmail", {
+                {...register("email", {
                   required: true,
                   pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                 })}
               />
-              {errors.gmail?.type === "required" && <p>El campo es requerido</p>}
-              {errors.gmail?.type === "pattern" && (
+              {errors.email?.type === "required" && <p>El campo es requerido</p>}
+              {errors.email?.type === "pattern" && (
                 <p>El formato de email no es correcto</p>
               )}
             </div>

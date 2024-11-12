@@ -15,7 +15,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const response = await fetch("http://localhost:8000/register", {
+      const response = await fetch("http://localhost:3000/users/create", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -39,13 +39,13 @@ const Register = () => {
           <input
             className="register-input"
             placeholder="Email"
-            {...register("gmail", {
+            {...register("email", {
               required: true,
               pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
             })}
           />
-          {errors.gmail?.type === "required" && <p>El campo es requerido</p>}
-          {errors.gmaemailil?.type === "pattern" && (
+          {errors.email?.type === "required" && <p>El campo es requerido</p>}
+          {errors.emaemailil?.type === "pattern" && (
             <p>El formato de email no es correcto</p>
           )}
         </div>
@@ -54,11 +54,11 @@ const Register = () => {
             className="register-input"
             type="text"
             placeholder="Nombre De usuario"
-            {...register("nombreUsuario", {
+            {...register("username", {
               required: true,
             })}
           />
-          {errors.nombreUsuario?.type === "required" && (
+          {errors.username?.type === "required" && (
             <p>El campo es requerido</p>
           )}
         </div>
